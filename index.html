@@ -1,0 +1,814 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CV · GersonHMG</title>
+  <meta name="description" content="Curriculum vitae of Gerson Marihuan Goncalves, software and machine learning engineer in Valparaíso, Chile.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <script>
+    // Same theme pick as the home page: saved choice, else the system setting.
+    (function () {
+      let t = null;
+      try { t = localStorage.getItem('theme'); } catch (_) {}
+      if (t !== 'light' && t !== 'dark') t = matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+      document.documentElement.dataset.theme = t;
+    })();
+  </script>
+  <style>
+    /* ---------- An old printed page: laid paper, letterpress ink, oxblood rubrics ---------- */
+    /* the portfolio's own palette: ember for headings and links, ice blue for the supporting marks */
+    :root {
+      --bg: #dde7ee;
+      --paper: #f4f8fb;
+      --ink: #0e2236;
+      --ink-soft: #2f4a62;
+      --dim: #5a7489;
+      --red: #c4561f;
+      --blue: #2c6f9e;
+      --accent: var(--red);
+      --line: #c3d1dc;
+      --line-hi: #8ea6b8;
+      --serif: "EB Garamond", Garamond, "Times New Roman", serif;
+      --fell: "IM Fell English", "EB Garamond", Garamond, serif;
+      --fell-sc: "IM Fell English SC", "IM Fell English", Garamond, serif;
+      --mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+    }
+    :root[data-theme="dark"] {
+      --bg: #0b1a28;
+      --paper: #0f2132;
+      --ink: #e9f1f7;
+      --ink-soft: #b5c7d5;
+      --dim: #7d93a5;
+      --red: #e8743a;
+      --blue: #8fc4ee;
+      --line: #1d3346;
+      --line-hi: #3d5a72;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--serif);
+      font-size: 18px;
+      line-height: 1.55;
+      font-variant-numeric: oldstyle-nums;
+      padding: 0 24px;
+    }
+    a { color: inherit; text-decoration: none; }
+    ::selection { background: var(--red); color: var(--paper); }
+
+    /* ---------- Menu ---------- */
+    .menu {
+      max-width: 860px; margin: 0 auto; height: 72px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .brand { font-family: var(--fell-sc); font-size: 20px; letter-spacing: .08em; }
+    .menu .right { display: flex; align-items: center; gap: 22px; }
+    .menu a.item {
+      font-family: var(--fell-sc); font-size: 16px; letter-spacing: .12em; color: var(--ink-soft);
+      transition: color 200ms ease;
+    }
+    .menu a.item:hover, .menu a.item.active { color: var(--accent); }
+    .theme {
+      display: grid; place-items: center; width: 30px; height: 30px;
+      background: none; border: 1px solid var(--line-hi); border-radius: 50%;
+      color: var(--ink-soft); cursor: pointer;
+      transition: color 200ms ease, border-color 200ms ease;
+    }
+    .theme:hover { color: var(--accent); border-color: var(--accent); }
+    .theme svg { width: 14px; height: 14px; }
+    .theme .moon { display: none; }
+    :root[data-theme="light"] .theme .sun-icon { display: none; }
+    :root[data-theme="light"] .theme .moon { display: block; }
+
+    /* ---------- The sheet: the site panel with a ruled printer's frame ---------- */
+    .sheet {
+      max-width: 860px; margin: 24px auto 48px;
+      padding: 72px 80px 56px;
+      background: var(--paper);
+      border-top: 2px solid transparent;
+      border-image: linear-gradient(to right, var(--red), var(--line-hi) 50%, var(--blue)) 1;
+      box-shadow: 0 12px 32px -16px rgba(5, 20, 35, .35);
+      position: relative;
+    }
+    /* a printer's frame: thick and thin rule just inside the edge */
+    .sheet::before {
+      content: ""; position: absolute; inset: 18px; pointer-events: none;
+      border: 1px solid var(--line-hi);
+      outline: 3px double var(--line-hi); outline-offset: 4px;
+    }
+
+    /* ---------- Title block, centred like a title page ---------- */
+    .sheet > header { text-align: center; }
+    .eyebrow {
+      font-family: var(--fell); font-style: italic; font-size: 18px; color: var(--red);
+    }
+    .sheet h1 {
+      font-family: var(--fell); font-weight: 400; line-height: 1;
+      font-size: clamp(38px, 6.4vw, 62px); letter-spacing: .01em;
+      margin: 14px 0 12px;
+    }
+    .role {
+      font-family: var(--fell-sc); font-size: 19px; letter-spacing: .12em; color: var(--ink-soft);
+    }
+    /* fleuron between two rules */
+    .role::after {
+      content: "❦"; display: block; margin: 18px auto 0; font-size: 20px; color: var(--blue);
+    }
+    .contact {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 22px; margin-top: 16px;
+      font-size: 15px; font-style: italic; color: var(--ink-soft);
+    }
+    .contact a, .contact span { display: inline-flex; align-items: center; gap: 7px; }
+    .contact a { transition: color 200ms ease; }
+    .contact a:hover { color: var(--accent); }
+    .contact svg { width: 13px; height: 13px; flex: none; opacity: .75; }
+
+    /* ---------- Section heads: small capitals between rules ---------- */
+    section { margin-top: 52px; }
+    h2 {
+      display: flex; align-items: center; gap: 18px;
+      font-family: var(--fell-sc); font-weight: 400; font-size: 22px; letter-spacing: .14em;
+      color: var(--red); margin-bottom: 22px;
+    }
+    h2::after { content: ""; flex: 1; border-top: 1px solid var(--line-hi); }
+    /* hackathon touch: each section is numbered like a source listing */
+    .sheet { counter-reset: sec; }
+    h2 { counter-increment: sec; }
+    h2::before {
+      content: "0" counter(sec) " //"; flex: none;
+      font: 400 12px/1 var(--mono); letter-spacing: .04em; color: var(--blue);
+    }
+
+    .about { font-size: 18px; color: var(--ink); text-align: justify; hyphens: auto; }
+    .about + .about { margin-top: 10px; }
+
+    /* ---------- Entries ---------- */
+    .timeline { border-left: 1px solid var(--line-hi); margin-left: 5px; padding-left: 28px; }
+    .entry { position: relative; }
+    .entry + .entry { margin-top: 34px; }
+    .timeline .entry::before {
+      content: ""; position: absolute; left: -34px; top: 9px;
+      width: 11px; height: 11px; border-radius: 50%;
+      background: var(--paper); border: 1px solid var(--ink-soft);
+    }
+    .timeline .entry.now::before { background: var(--red); border-color: var(--red); box-shadow: 0 0 0 4px color-mix(in srgb, var(--red) 18%, transparent); }
+
+    .entry-head { display: flex; justify-content: space-between; align-items: baseline; gap: 4px 16px; flex-wrap: wrap; }
+    .entry h3 { font-family: var(--fell); font-weight: 400; font-size: 22px; line-height: 1.25; }
+    .when {
+      font-style: italic; font-size: 16px; color: var(--dim); white-space: nowrap;
+    }
+    .where {
+      font-family: var(--fell-sc); font-size: 17px; letter-spacing: .06em; color: var(--blue); margin-top: 2px;
+    }
+    .entry.now .where { color: var(--red); }
+    .entry ul { margin-top: 10px; padding-left: 1.1em; color: var(--ink); font-size: 17px; list-style: none; }
+    .entry li { position: relative; text-align: justify; hyphens: auto; }
+    .entry li::before { content: "❧"; position: absolute; left: -1.15em; top: .05em; color: var(--blue); font-size: .85em; }
+    .entry li + li { margin-top: .35em; }
+    .entry p.note { margin-top: 2px; color: var(--ink-soft); font-size: 16px; }
+
+    /* logos printed in ink: greyed, warmed, and pressed into the paper */
+    .entry.has-logo { display: grid; grid-template-columns: 56px 1fr; gap: 0 20px; align-items: start; }
+    .logo {
+      width: 56px; height: 56px; object-fit: contain; display: block;
+    }
+    .logo.tile { border-radius: 10px; }
+    .logo.tile[src*="anid"] { object-fit: cover; }
+
+    .sub-role { margin-top: 20px; padding-top: 14px; border-top: 1px dotted var(--line-hi); }
+    .sub-role h4 { font-family: var(--fell); font-weight: 400; font-size: 18px; color: var(--ink-soft); }
+    .entry .sub-role ul { margin-top: 8px; }
+
+    .logo.mono {
+      display: grid; place-items: center; border: 1px solid var(--line-hi);
+      font-family: var(--fell-sc); font-size: 16px; color: var(--dim);
+    }
+    .entry-sub { font-style: italic; color: var(--dim); font-size: 16px; margin-top: 2px; }
+    .entry a.ext { color: var(--red); border-bottom: 1px solid currentColor; }
+    .entry a.ext:hover { border-bottom-color: transparent; }
+    .inline-ic { display: inline-block; width: 1.2em; height: 1.2em; margin: 0 .3em 0 .1em; vertical-align: -.25em; }
+    .tech { margin-top: 8px; font-size: 15px; font-style: italic; color: var(--dim); }
+    .tech b { font-weight: 400; font-style: normal; font-family: var(--fell-sc); letter-spacing: .06em; color: var(--blue); }
+
+    /* project links: small-capital references with their marks */
+    .proj-links { display: flex; flex-wrap: wrap; gap: 6px 20px; margin-top: 6px; }
+    .proj-links a {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-family: var(--fell-sc); font-size: 16px; letter-spacing: .06em;
+      color: var(--red); border-bottom: 1px solid transparent;
+      transition: border-color 200ms ease;
+    }
+    .proj-links a:hover { border-bottom-color: currentColor; }
+    .proj-links svg { width: 13px; height: 13px; flex: none; }
+
+    /* ---------- Project cards: icon and title, a short line, tags, then links ---------- */
+    .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 30px; }
+    .card {
+      display: flex; flex-direction: column; gap: 14px;
+      padding: 22px 22px 18px; border: 1px solid var(--line); border-radius: 12px;
+      background: color-mix(in srgb, var(--paper) 70%, var(--bg));
+      transition: border-color 250ms ease, transform 250ms ease, box-shadow 250ms ease;
+    }
+    .card:hover {
+      border-color: var(--line-hi); transform: translateY(-2px);
+      box-shadow: 0 10px 24px -14px color-mix(in srgb, var(--ink) 40%, transparent);
+    }
+    .card-head { display: grid; grid-template-columns: 56px 1fr; gap: 0 16px; align-items: center; }
+    .card h3 { font-family: var(--fell); font-weight: 400; font-size: 22px; line-height: 1.2; }
+    .card h3 a { transition: color 200ms ease; }
+    .card h3 a:hover { color: var(--red); }
+    .card h3 .arr { width: .6em; height: .6em; vertical-align: .05em; margin-left: 2px; color: var(--dim); }
+    .nowrap { white-space: nowrap; }
+    .card-sub { font-size: 15px; font-style: italic; color: var(--dim); margin-top: 3px; }
+    .card-text { font-size: 16.5px; line-height: 1.5; color: var(--ink-soft); }
+    .card-text a.ext { color: var(--red); border-bottom: 1px solid currentColor; }
+    .card-text a.ext:hover { border-bottom-color: transparent; }
+    /* tags and links sit together at the foot of the card, so both cards line up */
+    .card-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; }
+    .card-tags span {
+      font: 400 12px/1 var(--mono); padding: 7px 10px; border-radius: 6px;
+      color: var(--ink-soft); background: var(--paper); border: 1px solid var(--line);
+    }
+    .card-links { display: flex; flex-wrap: wrap; gap: 6px 20px; padding-top: 4px; }
+    .card-links a {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-family: var(--fell-sc); font-size: 16px; letter-spacing: .06em; color: var(--red);
+      border-bottom: 1px solid transparent; transition: border-color 200ms ease;
+    }
+    .card-links a:hover { border-bottom-color: currentColor; }
+    .card-links svg { width: 13px; height: 13px; flex: none; }
+    @media (max-width: 640px) { .cards { grid-template-columns: 1fr; } }
+    @media print {
+      .cards { gap: 10px; }
+      .card { break-inside: avoid; background: none; box-shadow: none; transform: none; }
+    }
+
+    /* ---------- Talks and recognition: a ruled register ---------- */
+    .talks { list-style: none; border-top: 1px solid var(--line); margin-top: -6px; }
+    .talks li {
+      display: grid; grid-template-columns: 36px 1fr; gap: 0 16px; align-items: center;
+      padding: 11px 0; border-bottom: 1px solid var(--line);
+    }
+    .talks .ic { width: 36px; height: 36px; display: grid; place-items: center; overflow: hidden; border-radius: 9px; background: #fff; border: 1px solid var(--line); padding: 4px; }
+    .talks .ic.fill { padding: 0; }
+    .talks .ic.wide { padding: 2px; }
+    .talks .ic img {
+      width: 100%; height: 100%; object-fit: contain; display: block;
+    }
+    .talks .ic.fill img { object-fit: cover; }
+    .talks .t { font-family: var(--fell); font-size: 19px; line-height: 1.3; }
+    .talks .yr { margin-left: 8px; font-family: var(--serif); font-style: italic; font-size: 16px; color: var(--dim); }
+    .talks .s { font-size: 15.5px; line-height: 1.4; color: var(--dim); margin-top: 1px; }
+    .talks .s i { color: var(--ink-soft); }
+
+    /* ---------- Skills: set as a line of type, not as buttons ---------- */
+    .chips { text-align: center; line-height: 1.9; font-size: 17px; color: var(--ink); }
+    .chip { display: inline-block; white-space: nowrap; }
+    .chip:not(:last-child)::after { content: "·"; margin: 0 .2em 0 .55em; color: var(--blue); }
+
+    /* colophon */
+    .sheet footer {
+      margin-top: 56px; padding-top: 18px; border-top: 3px double var(--line-hi);
+      display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+      font-family: var(--fell-sc); font-size: 16px; letter-spacing: .06em; color: var(--dim);
+    }
+    .sheet footer a, .sheet footer button { transition: color 200ms ease; }
+    .sheet footer a:hover, .sheet footer button:hover { color: var(--accent); }
+    .sheet footer button { margin-left: auto; font: inherit; letter-spacing: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+
+    .site-foot {
+      max-width: 860px; margin: 0 auto; padding: 0 0 32px; text-align: center;
+      font-style: italic; font-size: 15px; color: var(--dim);
+    }
+
+    /* ---------- Index: a running head that sticks while you read ---------- */
+    html { scroll-behavior: smooth; }
+    section[id] { scroll-margin-top: 72px; }
+    .toc {
+      position: sticky; top: 0; z-index: 4;
+      margin: 36px -54px 0; padding: 0 54px;
+      display: flex; justify-content: center; gap: 26px; overflow-x: auto; scrollbar-width: none;
+      background: var(--paper);
+      border-top: 1px solid var(--line-hi); border-bottom: 1px solid var(--line-hi);
+    }
+    .toc::-webkit-scrollbar { display: none; }
+    .toc a {
+      flex: none; padding: 12px 0 10px; position: relative;
+      font-family: var(--fell-sc); font-size: 16px; letter-spacing: .1em;
+      color: var(--ink-soft); transition: color 200ms ease;
+    }
+    .toc a:hover { color: var(--ink); }
+    .toc a.on { color: var(--red); }
+    .toc a::after {
+      content: ""; position: absolute; left: 0; right: 0; bottom: 6px; height: 1px;
+      background: var(--red); transform: scaleX(0); transform-origin: left;
+      transition: transform 250ms ease;
+    }
+    .toc a.on::after { transform: none; }
+    .toc + section { margin-top: 40px; }
+
+    /* ---------- Hackathon effects ---------- */
+    /* a faint dot grid behind the page, like an engineering pad */
+    body {
+      background-image: radial-gradient(circle, var(--line-hi) 1px, transparent 1.4px);
+      background-size: 24px 24px;
+    }
+
+    /* terminal prompt and blinking caret */
+    .eyebrow::before { content: "> "; font: 400 14px/1 var(--mono); font-style: normal; color: var(--blue); }
+    .caret {
+      display: inline-block; width: .5em; height: 1em; margin-left: 3px; vertical-align: -.12em;
+      background: var(--red); animation: blink 1s steps(1) infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    /* glitch: hover the name and it splits into ember and ice */
+    .sheet h1 { position: relative; cursor: default; animation: rise 1.4s cubic-bezier(.2, .7, .2, 1) both; }
+    /* the name settles in gently: fades up out of a soft blur */
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(10px); filter: blur(6px); }
+      to   { opacity: 1; transform: none; filter: none; }
+    }
+    .sheet h1::before, .sheet h1::after {
+      content: attr(data-text); position: absolute; inset: 0; pointer-events: none; opacity: 0;
+    }
+    .sheet h1::before { color: var(--red); }
+    .sheet h1::after { color: var(--blue); }
+    .sheet h1:hover::before { opacity: .8; animation: glitch-a 900ms steps(2) infinite; }
+    .sheet h1:hover::after { opacity: .8; animation: glitch-b 700ms steps(2) infinite; }
+    @keyframes glitch-a {
+      0%   { transform: translate(-3px, 0); clip-path: inset(10% 0 60% 0); }
+      25%  { transform: translate(3px, -1px); clip-path: inset(55% 0 20% 0); }
+      50%  { transform: translate(-2px, 1px); clip-path: inset(30% 0 45% 0); }
+      75%  { transform: translate(2px, 0); clip-path: inset(75% 0 5% 0); }
+      100% { transform: translate(-3px, 0); clip-path: inset(0 0 85% 0); }
+    }
+    @keyframes glitch-b {
+      0%   { transform: translate(3px, 0); clip-path: inset(65% 0 10% 0); }
+      25%  { transform: translate(-3px, 1px); clip-path: inset(5% 0 75% 0); }
+      50%  { transform: translate(2px, -1px); clip-path: inset(40% 0 35% 0); }
+      75%  { transform: translate(-2px, 0); clip-path: inset(20% 0 60% 0); }
+      100% { transform: translate(3px, 0); clip-path: inset(85% 0 0 0); }
+    }
+
+    /* entries light up on hover: logo lifts with an ember ring, title turns ember */
+    .entry .logo { transition: box-shadow 250ms ease, transform 250ms ease; }
+    .entry:hover .logo {
+      transform: translateY(-2px);
+      box-shadow: 0 0 0 1px var(--red), 0 6px 18px -6px color-mix(in srgb, var(--red) 70%, transparent);
+    }
+    .entry h3 { transition: color 200ms ease; }
+    .entry:hover > div > .entry-head h3 { color: var(--red); }
+    .timeline .entry::before { transition: border-color 200ms ease; }
+    .timeline .entry:hover::before { border-color: var(--red); }
+
+    /* skills decode like a terminal when hovered */
+    .chip { cursor: default; transition: color 150ms ease; }
+    .chip:hover { color: var(--red); }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .toc a::after { transition: none; }
+      .caret, .sheet h1 { animation: none; }
+      .sheet h1:hover::before, .sheet h1:hover::after { animation: none; opacity: 0; }
+    }
+
+    @media (max-width: 600px) {
+      body { padding: 0 16px; font-size: 17px; }
+      .sheet { padding: 44px 26px 36px; margin-top: 8px; }
+      .sheet::before { inset: 8px; outline-offset: 2px; }
+      .toc { margin: 28px -17px 0; padding: 0 17px; gap: 20px; justify-content: flex-start; }
+      section { margin-top: 42px; }
+      .timeline { padding-left: 22px; }
+      .timeline .entry::before { left: -28px; }
+      .entry.has-logo { grid-template-columns: 44px 1fr; gap: 0 14px; }
+      .logo { width: 44px; height: 44px; }
+      .about, .entry li { text-align: left; }
+    }
+
+    /* print: keep the type, drop the paper and the chrome */
+    @media print {
+      :root, :root[data-theme="dark"] {
+        --bg: #fff; --paper: #fff; --ink: #000; --ink-soft: #222; --dim: #555;
+        --red: #b44a16; --blue: #2c6f9e; --line: #ccc; --line-hi: #999;
+      }
+      body { padding: 0; font-size: 12pt; }
+      .menu, .site-foot, .sheet footer, .toc { display: none; }
+      .sheet { padding: 0; margin: 0; max-width: none; box-shadow: none; background: #fff; border: 0; }
+      .sheet::before, h2::before, .eyebrow::before, .caret { display: none; }
+      body { background-image: none; }
+      .entry { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="menu">
+    <span class="brand">GERSON</span>
+    <div class="right">
+      <button class="theme" id="theme" type="button" aria-label="Switch theme">
+        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main class="sheet">
+
+    <!-- Header -->
+    <header>
+      <div class="eyebrow">Curriculum vitae</div>
+      <h1 data-text="Gerson Marihuan Goncalves">Gerson Marihuan Goncalves</h1>
+      <p class="role">Software &amp; Machine Learning Engineer</p>
+      <div class="contact">
+        <a href="mailto:gersonhmg@gmail.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="M3 7l9 6 9-6"/></svg>
+          gersonhmg@gmail.com
+        </a>
+        <a href="https://github.com/GersonHMG" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.09 0 4.42-2.69 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>
+          github.com/GersonHMG
+        </a>
+        <a href="https://www.linkedin.com/in/gersonhmg/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 0H5a5 5 0 0 0-5 5v14a5 5 0 0 0 5 5h14a5 5 0 0 0 5-5V5a5 5 0 0 0-5-5zM8 19H5V8h3v11zM6.5 6.73a1.76 1.76 0 1 1 0-3.53 1.76 1.76 0 0 1 0 3.53zM20 19h-3v-5.6c0-3.37-4-3.12-4 0V19h-3V8h3v1.77c1.4-2.59 7-2.78 7 2.47V19z"/></svg>
+          linkedin.com/in/gersonhmg
+        </a>
+        <span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          Valparaíso, Chile
+        </span>
+      </div>
+    </header>
+
+    <!-- Index: jump to any section; the current one is highlighted while scrolling -->
+    <nav class="toc" aria-label="CV sections">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
+      <a href="#talks">Talks</a>
+      <a href="#skills">Skills</a>
+    </nav>
+
+    <!-- About -->
+    <section id="about">
+      <h2>About</h2>
+      <p class="about">
+        I started out earning a living by programming slot machines in Garry's Mod, a Roblox-style sandbox game. Then I studied computer science at Universidad Técnica Federico Santa María, where I spent a good while building a graveyard of side apps before finally landing in robotics. Robotics became my main reason to keep learning, and it is what led me into machine learning. Since then I've been combining the two.
+      </p>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects">
+      <h2>Projects</h2>
+      <div class="entry has-logo">
+        <img class="logo tile" src="assets/freespeak.jpg" alt="FreeSpeak app icon" width="56" height="56">
+        <div>
+          <div class="entry-head">
+            <h3>FreeSpeak: Practice English Offline</h3>
+            <span class="when">2026</span>
+          </div>
+          <p class="where">Android app</p>
+          <div class="proj-links">
+            <a href="https://play.google.com/store/apps/details?id=com.gersonhmg.freespeak" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.2 2.3a1.5 1.5 0 0 0-.7 1.3v16.8c0 .5.3 1 .7 1.3l9.6-9.7-9.6-9.7zm10.7 8.6 2.7-2.7L6.3 1.8l8.6 9.1zm4.1-1.9-3 1.7-2.9 2.9 2.9 2.9 3 1.7c1-.6 1-2.1 0-2.7L20 14c.9-.6.9-1.9 0-2.5L19 9zm-4.1 4.1-8.6 9.1 11.3-6.4-2.7-2.7z"/></svg>
+              Google Play
+            </a>
+            <a href="https://github.com/GersonHMG/freespeak" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.09 0 4.42-2.69 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>
+              GitHub
+            </a>
+            <a href="https://huggingface.co/GersonHMG/lapwing" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><circle cx="8.8" cy="10" r=".9" fill="currentColor" stroke="none"/><circle cx="15.2" cy="10" r=".9" fill="currentColor" stroke="none"/><path d="M8 14.2c1 1.6 2.4 2.4 4 2.4s3-.8 4-2.4"/></svg>
+              Hugging Face
+            </a>
+          </div>
+          <ul>
+            <li>Built and published a Flutter app for practising English that runs fully offline, with an on-device speech model (PyTorch, ONNX) that transcribes speech and scores pronunciation.</li>
+            <li>Designed a hybrid model that transcribes words and phonemes at once, cutting inference time by 80% (5 s to 1 s) for near-real-time pronunciation feedback.</li>
+          </ul>
+          <p class="tech"><b>Tech:</b> Flutter, PyTorch, ONNX, MLflow, scikit-learn</p>
+        </div>
+      </div>
+
+      <!-- smaller projects: two cards side by side -->
+      <div class="cards">
+        <article class="card">
+          <div class="card-head">
+            <img class="logo tile" src="assets/sysmic.png" alt="Sysmic Robotics logo" width="56" height="56">
+            <div>
+              <h3><a href="https://github.com/GersonHMG/engine" target="_blank" rel="noopener">RoboCup SSL <span class="nowrap">Engine <svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span></a></h3>
+              <p class="card-sub">Robotics · Desktop app · 2026</p>
+            </div>
+          </div>
+          <p class="card-text">A lightweight engine for <a class="ext" href="https://ssl.robocup.org" target="_blank" rel="noopener">RoboCup Small Size League</a> robots: reads vision and referee data, drives the robots by radio or in the grSim simulator, and runs team strategy written in Lua.</p>
+          <div class="card-tags"><span>Rust</span><span>Lua</span><span>Iced</span></div>
+          <div class="card-links">
+            <a href="https://www.youtube.com/watch?v=rncd2WXzMhY" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"/></svg> Video</a>
+            <a href="https://github.com/GersonHMG/engine" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.09 0 4.42-2.69 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg> Source</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-head">
+            <img class="logo tile" src="assets/hurryboats.jpg" alt="HurryBoats gameplay: a boat among hexagonal islands" width="56" height="56">
+            <div>
+              <h3><a href="https://github.com/GersonHMG/HurryBoats" target="_blank" rel="noopener"><span class="nowrap">HurryBoats <svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span></a></h3>
+              <p class="card-sub">Multiplayer game · PC · 2022</p>
+            </div>
+          </div>
+          <p class="card-text">Online boat battles: steer your boat, grab ammo crates and sink your rivals. Hand-coded in <a class="ext" href="https://godotengine.org" target="_blank" rel="noopener">Godot</a>, with peer-to-peer multiplayer over Steam.</p>
+          <div class="card-tags"><span>C#</span><span>Godot</span><span>Steamworks</span><span>P2P</span></div>
+          <div class="card-links">
+            <a href="https://www.youtube.com/watch?v=t4ebcABR8lQ" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"/></svg> Video</a>
+            <a href="https://github.com/GersonHMG/HurryBoats" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.09 0 4.42-2.69 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg> Source</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Experience: mark the current role with class="now" -->
+    <section id="experience">
+      <h2>Experience</h2>
+      <div class="timeline">
+
+        <div class="entry now has-logo">
+          <img class="logo" src="assets/inseport.png" alt="Inseport logo" width="56" height="56">
+          <div>
+            <div class="entry-head">
+              <h3>Software Engineer</h3>
+              <span class="when">Jun 2026 – Present</span>
+            </div>
+            <p class="where">Inseport</p>
+            <ul>
+              <li>Built and launched <img class="inline-ic" src="assets/rindebot.svg" alt="" width="18" height="18"><a class="ext" href="https://rindebot.com" target="_blank" rel="noopener">rindebot.com</a>, an LLM-powered WhatsApp agent that reads receipts with vision and logs expenses automatically. It has processed over 200 expense reports.</li>
+              <li>Built a serverless expense-management system on AWS that automates the full reporting, approval and reimbursement cycle, with infrastructure as code in AWS CDK.</li>
+            </ul>
+            <p class="tech"><b>Tech:</b> RAG, TypeScript, Python, Langfuse, React, AWS Cloud</p>
+          </div>
+        </div>
+
+        <div class="entry has-logo">
+          <img class="logo" src="assets/utfsm.png" alt="Universidad Técnica Federico Santa María crest" width="56" height="56">
+          <div>
+            <div class="entry-head">
+              <h3>Teaching Assistant, Statistics</h3>
+              <span class="when">Mar – Dec 2026</span>
+            </div>
+            <p class="where">Universidad Técnica Federico Santa María</p>
+            <ul>
+              <li>Guided students through applied data science and computational statistics in Python: exploratory data analysis, simulation and modelling.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="entry has-logo">
+          <img class="logo tile" src="assets/anid.png" alt="ANID, Agencia Nacional de Investigación y Desarrollo logo" width="56" height="56">
+          <div>
+            <div class="entry-head">
+              <h3>Machine Learning Engineer</h3>
+              <span class="when">Dec 2025 – Jun 2026</span>
+            </div>
+            <p class="where">Fondecyt research project</p>
+            <ul>
+              <li>Designed a custom EEG seizure-detection architecture (CNN, attention and temporal convolutions) that reached 98% accuracy and caught 94% of seizures in patients the model had never seen, beating the published state-of-the-art benchmark.</li>
+            </ul>
+            <p class="tech"><b>Tech:</b> PyTorch, MLflow, Python, NumPy, pandas</p>
+          </div>
+        </div>
+
+        <div class="entry has-logo">
+          <img class="logo" src="assets/sysmic.png" alt="Sysmic Robotics logo" width="56" height="56">
+          <div>
+            <div class="entry-head">
+              <h3>Lead Software Engineer</h3>
+              <span class="when">2024 – 2026</span>
+            </div>
+            <p class="where">Sysmic Robotics</p>
+            <ul>
+              <li>Led a team of 3 software engineers building the robots' real-time autonomous control system in Rust, a key piece in the 13-person team qualifying for RoboCup 2025 in Brazil.</li>
+              <li>Built a deep-learning digital twin that estimates the robot's physical parameters (torque, acceleration, mass, centre of mass) from real data, cutting sim-to-real adaptation time by 60%.</li>
+            </ul>
+            <p class="tech"><b>Tech:</b> Rust, Python, Docker, MCP, TensorBoard</p>
+          </div>
+        </div>
+
+        <div class="entry has-logo">
+          <img class="logo tile" src="assets/chessmind.png" alt="ChessMind logo" width="56" height="56">
+          <div>
+            <div class="entry-head">
+              <h3>Software Engineering Intern</h3>
+              <span class="when">Dec 2024 – Feb 2025</span>
+            </div>
+            <p class="where">ChessMind</p>
+            <ul>
+              <li>Improved the chess bot: added premoves, so players can queue several moves that play out automatically, and cut the bot's response time.</li>
+            </ul>
+            <p class="tech"><b>Tech:</b> Vue.js, Django</p>
+          </div>
+        </div>
+
+        <div class="entry has-logo">
+          <img class="logo" src="assets/licklider.png" alt="Licklider logo" width="56" height="56">
+          <div>
+            <div class="entry-head">
+              <h3>Software Engineer</h3>
+              <span class="when">Jan – Jun 2023</span>
+            </div>
+            <p class="where">Licklider · Remote</p>
+            <ul>
+              <li>Built a Power BI segmentation dashboard for over 1,000 customers using the RFM model (recency, frequency, monetary) to flag accounts at risk of churn and prioritise retention.</li>
+              <li>Hardened the security of an institutional PHP platform, which then passed an external consultancy's security audit.</li>
+            </ul>
+            <p class="tech"><b>Tech:</b> Power BI, PHP, Azure</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section id="education">
+      <h2>Education</h2>
+      <div class="entry has-logo">
+        <img class="logo" src="assets/utfsm.png" alt="Universidad Técnica Federico Santa María crest" width="56" height="56">
+        <div>
+          <div class="entry-head">
+            <h3>Master of Science in Computer Science</h3>
+            <span class="when">2025 – 2026</span>
+          </div>
+          <p class="note">Universidad Técnica Federico Santa María · Valparaíso, Chile</p>
+          <p class="entry-sub">Thesis: “Enhancing Seizure Detection via Asymmetric Spatiotemporal Feature Extraction”</p>
+        </div>
+      </div>
+
+      <div class="entry has-logo">
+        <img class="logo" src="assets/utfsm.png" alt="Universidad Técnica Federico Santa María crest" width="56" height="56">
+        <div>
+          <div class="entry-head">
+            <h3>Computer Science</h3>
+            <span class="when">2019 – 2025</span>
+          </div>
+          <p class="note">Universidad Técnica Federico Santa María · Valparaíso, Chile</p>
+          <p class="entry-sub">Final project: “Interior Design Generation through Natural Language Processing for Game Engines”</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Talks and participation -->
+    <section id="talks">
+      <h2>Talks &amp; recognition</h2>
+      <ul class="talks">
+        <li>
+          <span class="ic"><img src="assets/ieee-embs.png" alt="IEEE EMBS logo"></span>
+          <div><p class="t">IEEE BSN<span class="yr">2026</span></p><p class="s"><i>Enhancing Seizure Detection via Asymmetric Spatiotemporal Feature Extraction</i>. Porto, Portugal.</p></div>
+        </li>
+        <li>
+          <span class="ic fill"><img src="assets/robocup.jpg" alt="RoboCup 2025 Salvador logo"></span>
+          <div><p class="t">RoboCup SSL<span class="yr">2025</span></p><p class="s">Participant. Salvador, Bahia, Brazil.</p></div>
+        </li>
+        <li>
+          <span class="ic"><img src="assets/evic.jpg" alt="EVIC 2025 logo"></span>
+          <div><p class="t">EVIC<span class="yr">2025</span></p><p class="s"><i>Dynamics Modeling for Reliable Sim-to-Real Transfer in RoboCup SSL</i>. U. de los Andes, Santiago.</p></div>
+        </li>
+        <li>
+          <span class="ic wide"><img src="assets/ntt-data.png" alt="NTT DATA logo"></span>
+          <div><p class="t">Finalist, NTT Hackathon<span class="yr">2025</span></p><p class="s">Santiago.</p></div>
+        </li>
+        <li>
+          <span class="ic"><img src="assets/utfsm.png" alt="Universidad Técnica Federico Santa María crest"></span>
+          <div><p class="t">Outstanding Student<span class="yr">2019</span></p><p class="s">Universidad Técnica Federico Santa María.</p></div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills">
+      <h2>Skills</h2>
+      <div class="chips">
+        <span class="chip">Python</span>
+        <span class="chip">TypeScript</span>
+        <span class="chip">React</span>
+        <span class="chip">Rust</span>
+        <span class="chip">PyTorch</span>
+        <span class="chip">MLflow</span>
+        <span class="chip">Deep learning</span>
+        <span class="chip">LLM agents · LangChain</span>
+        <span class="chip">AWS · CDK · Lambda</span>
+        <span class="chip">Docker</span>
+        <span class="chip">MCP</span>
+        <span class="chip">Flutter</span>
+        <span class="chip">ONNX</span>
+        <span class="chip">Signal processing</span>
+        <span class="chip">Robotics</span>
+      </div>
+    </section>
+
+    <footer>
+      <button type="button" onclick="window.print()">Print / save as PDF ↓</button>
+    </footer>
+  </main>
+
+  <div class="site-foot" id="copy">© Gerson Marihuan</div>
+
+  <script>
+    document.getElementById('copy').textContent = `© ${new Date().getFullYear()} Gerson Marihuan`;
+    const btn = document.getElementById('theme');
+    const label = () => btn.setAttribute('aria-label',
+      `Switch to ${document.documentElement.dataset.theme === 'light' ? 'dark' : 'light'} theme`);
+    btn.addEventListener('click', () => {
+      const t = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+      document.documentElement.dataset.theme = t;
+      try { localStorage.setItem('theme', t); } catch (_) {}
+      label();
+    });
+    label();
+
+    /* ---------- Index: highlight the section being read ---------- */
+    (function () {
+      const links = [...document.querySelectorAll('.toc a')];
+      const sections = links.map(a => document.querySelector(a.getAttribute('href')));
+      function update() {
+        // the current section is the last one whose top has passed a line just under the strip;
+        // at the very bottom of the page, the last section wins even if it's short
+        const line = 120;
+        let i = 0;
+        sections.forEach((s, k) => { if (s.getBoundingClientRect().top <= line) i = k; });
+        if (innerHeight + scrollY >= document.documentElement.scrollHeight - 4) i = sections.length - 1;
+        links.forEach((a, k) => {
+          const on = k === i;
+          a.classList.toggle('on', on);
+          if (on) a.setAttribute('aria-current', 'location'); else a.removeAttribute('aria-current');
+        });
+        // on phones the strip scrolls sideways: keep the active link in view
+        const strip = links[i].parentElement, a = links[i];
+        if (a.offsetLeft < strip.scrollLeft || a.offsetLeft + a.offsetWidth > strip.scrollLeft + strip.clientWidth)
+          strip.scrollTo({ left: a.offsetLeft - 22, behavior: 'smooth' });
+      }
+      let raf = 0;
+      addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; update(); }); }, { passive: true });
+      addEventListener('resize', update);
+      update();
+    })();
+
+    /* ---------- Hackathon effects ---------- */
+    (function () {
+      const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const GLYPHS = '01<>/{}[]#$%&*+=?_';
+      const rand = () => GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
+
+      // decode: random glyphs settle, left to right, into the real letters
+      function decode(el, text, ms) {
+        if (still) { el.textContent = text; return Promise.resolve(); }
+        return new Promise(done => {
+          const start = performance.now();
+          (function frame(now) {
+            const k = Math.min(1, (now - start) / ms);
+            const fixed = Math.floor(k * text.length);
+            el.textContent = text.slice(0, fixed) +
+              [...text.slice(fixed)].map(c => c === ' ' ? ' ' : rand()).join('');
+            if (k < 1) requestAnimationFrame(frame); else { el.textContent = text; done(); }
+          })(start);
+        });
+      }
+
+
+      // the role types itself out, then leaves a blinking caret
+      const role = document.querySelector('.role');
+      const roleText = role.textContent.trim();
+      const typed = document.createTextNode('');
+      const caret = document.createElement('span');
+      caret.className = 'caret';
+      caret.setAttribute('aria-hidden', 'true');
+      role.setAttribute('aria-label', roleText);
+      role.replaceChildren(typed, caret);
+      if (still) typed.data = roleText;
+      else {
+        let n = 0;
+        setTimeout(function type() {
+          typed.data = roleText.slice(0, ++n);
+          if (n < roleText.length) setTimeout(type, 28 + Math.random() * 40);
+        }, 700);
+      }
+
+      // skills decode when hovered
+      document.querySelectorAll('.chip').forEach(c => {
+        const t = c.textContent;
+        let busy = false;
+        c.style.minWidth = c.getBoundingClientRect().width + 'px';
+        c.addEventListener('mouseenter', () => {
+          if (busy) return;
+          busy = true;
+          decode(c, t, 380).then(() => { busy = false; });
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

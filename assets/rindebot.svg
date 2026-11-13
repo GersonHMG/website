@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+  <!-- rindebot: una boleta con borde cortado y cara feliz de ojos cerrados. -->
+  <defs>
+    <linearGradient id="papel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#E6ECFB"/>
+    </linearGradient>
+  </defs>
+  <path d="M13 4h22a4 4 0 0 1 4 4v34l-3.75 2.5-3.75-2.5-3.75 2.5-3.75-2.5-3.75 2.5-3.75-2.5-3.75 2.5L9 42V8a4 4 0 0 1 4-4z"
+        fill="url(#papel)" stroke="#B4C3EC" stroke-width="1.4" stroke-linejoin="round"/>
+  <g fill="none" stroke="#0A1A3F" stroke-width="1.9" stroke-linecap="round">
+    <path d="M16.5 18.5q2-2.4 4 0"/>
+    <path d="M27.5 18.5q2-2.4 4 0"/>
+    <path d="M21.5 22.5q2.5 2.2 5 0"/>
+  </g>
+  <g stroke="#D3DCF3" stroke-width="2" stroke-linecap="round">
+    <path d="M15 30.5h18"/>
+    <path d="M15 35h11"/>
+  </g>
+</svg>
